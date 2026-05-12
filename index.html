@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>MILIGRAMA - Registro Compartilhado</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f4; padding: 20px; color: #1b301b; }
+        .form-container { background: white; border: 2px solid #2e7d32; border-radius: 12px; max-width: 900px; margin: auto; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .header { background: #2e7d32; color: white; text-align: center; padding: 10px; margin: -25px -25px 25px -25px; border-radius: 10px 10px 0 0; }
+        label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 5px; color: #2e7d32; }
+        input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #c8e6c9; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        button { background: #2e7d32; color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+        button:disabled { background: #ccc; }
+        .btn-group { display: flex; gap: 10px; }
+        .export { background: #1565c0; width: 100%; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #2e7d32; color: white; }
+        #loading { display: none; color: #2e7d32; font-weight: bold; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="header"><h2>MILIGRAMA - Registro de Perda</h2></div>
+    
+    <form id="perdaForm">
+        <div style="display: flex; gap: 15px;">
+            <input type="text" id="sku" placeholder="SKU" required style="flex: 0.5;">
+            <input type="text" id="produtoNome" placeholder="Nome do Produto" required style="flex: 1.5;">
+        </div>
+
+        <select id="motivo" required>
+            <option value="">Selecione o motivo...</option>
+            <option value="Roubo / Furto">1 - Roubo / Furto</option>
+            <option value="Avaria">2 - Avaria</option>
+            <option value="Vencimento">3 - Vencimento</option>
+            <option value="Perda no Processo">5 - Perda no Processo</option>
+        </select>
+
+        <div style="display: flex; gap: 15px;">
+            <input type="number" id="qtd" step="0.001" placeholder="Qtd" required>
+            <input type="number" id="qtdConfirma" step="0.001" placeholder="Confirme Qtd" required>
+        </div>
+
+        <div style="display: flex; gap: 15px;">
+            <select id="unidade" required>
+                <option value="G">G</option>
+                <option value="KG">KG</option>
+                <option value="ML">ML</option>
+                <option value="UN">UN</option>
+            </select>
+            <input type="text" id="lote" placeholder="Lote" required>
+        </div>
+
+        <textarea id="obs" placeholder="Observações..."></textarea>
+
+        <div id="loading">Enviando para a planilha central... aguarde.</div>
+        <div class="btn-group">
+            <button type="button" id="btnSalvar" onclick="salvarNaNuvem()">Salvar Registro</button>
+            <button type="button" class="export" onclick="exportarCSV()">Exportar Histórico</button>
+        </div>
+    </form>
+
+    <div style="margin-top: 30px;">
+        <h3>Histórico Geral (Nuvem)</h3>
+        <button onclick="carregarHistorico()" style="width: auto; padding: 5px 10px; font-size: 11px;">Atualizar Lista</button>
+        <table id="tabelaHistorico">
+            <thead>
+                <tr><th>Data</th><th>SKU</th><th>Produto</th><th>Qtd</th><th>Lote</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // PELE ATENÇÃO: Cole aqui o link que você copiou do Google Apps Script
+    const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbzVKD-G1JTNRRmp53Y-RejcLCCS-SXnMBlicqyLgEIKczIfK-oIb5_fs1sf8lnzvU8a/exec";
+
+    async function salvarNaNuvem() {
+        const btn = document.getElementById('btnSalvar');
+        const loading = document.getElementById('loading');
+        
+        // Validação básica
+        if(document.getElementById('qtd').value !== document.getElementById('qtdConfirma').value) {
+            alert("Quantidades não conferem!"); return;
+        }
+
+        const registro = {
+            data: new Date().toLocaleString('pt-BR'),
+            sku: document.getElementById('sku').value,
+            produto: document.getElementById('produtoNome').value,
+            motivo: document.getElementById('motivo').value,
+            qtd: document.getElementById('qtd').value,
+            unidade: document.getElementById('unidade').value,
+            lote: document.getElementById('lote').value,
+            obs: document.getElementById('obs').value
+        };
+
+        btn.disabled = true;
+        loading.style.display = "block";
+
+        try {
+            await fetch(URL_GOOGLE, {
+                method: 'POST',
+                mode: 'no-cors', // Necessário para Google Scripts
+                body: JSON.stringify(registro)
+            });
+            alert("Salvo na nuvem com sucesso!");
+            document.getElementById('perdaForm').reset();
+            carregarHistorico();
+        } catch (e) {
+            alert("Erro ao salvar: " + e);
+        } finally {
+            btn.disabled = false;
+            loading.style.display = "none";
+        }
+    }
+
+    async function carregarHistorico() {
+        const tbody = document.querySelector('#tabelaHistorico tbody');
+        tbody.innerHTML = "<tr><td colspan='5'>Carregando...</td></tr>";
+        
+        try {
+            const response = await fetch(URL_GOOGLE);
+            const dados = await response.json();
+            tbody.innerHTML = "";
+            // Pula a primeira linha (cabeçalho) e inverte para ver os mais recentes
+            dados.slice(1).reverse().forEach(linha => {
+                tbody.innerHTML += `<tr>
+                    <td>${linha[0]}</td><td>${linha[1]}</td>
+                    <td>${linha[2]}</td><td>${linha[4]}</td>
+                    <td>${linha[6]}</td>
+                </tr>`;
+            });
+        } catch (e) {
+            tbody.innerHTML = "<tr><td colspan='5'>Erro ao carregar dados.</td></tr>";
+        }
+    }
+
+    function exportarCSV() {
+        window.open(URL_GOOGLE.replace('/exec', '/exec?download=true'), '_blank');
+        // Ou simplesmente baixe direto da sua planilha Google em Arquivo > Baixar > CSV.
+    }
+
+    // Carrega ao abrir
+    carregarHistorico();
+</script>
+</body>
+</html>

@@ -461,25 +461,51 @@
     function fecharModal() { document.getElementById('modalOverlay').classList.remove('open'); }
 
     async function salvarNaNuvem() {
-        fecharModal();
-        const btn = document.getElementById('btnSalvar');
-        const loading = document.getElementById('loading');
+    fecharModal();
+    const btn = document.getElementById('btnSalvar');
+    const loading = document.getElementById('loading');
+    
+    // Captura a imagem em Base64 do elemento preview
+    const fotoPreview = document.getElementById('fotoImg');
+    const temFoto = document.getElementById('fotoPreview').style.display === 'block';
+    const fotoBase64 = temFoto ? fotoPreview.src : "";
 
-        const registro = {
-            data: new Date().toLocaleString('pt-BR'),
-            sku: document.getElementById('sku').value,
-            produto: document.getElementById('produtoNome').value,
-            setor: document.getElementById('setor').value,
-            responsavel: document.getElementById('responsavel').value,
-            motivo: document.getElementById('motivoVal').value,
-            qtd: document.getElementById('qtd').value,
-            unidade: document.getElementById('unidade').value,
-            lote: document.getElementById('lote').value,
-            obs: document.getElementById('obs').value
-        };
+    // Organiza os dados para o envio conforme o projeto BIP ESTOQUE
+    const registro = {
+        data: new Date().toLocaleString('pt-BR'),
+        sku: document.getElementById('sku').value,
+        produto: document.getElementById('produtoNome').value,
+        setor: document.getElementById('setor').value,
+        responsavel: document.getElementById('responsavel').value,
+        motivo: document.getElementById('motivoVal').value,
+        qtd: document.getElementById('qtd').value,
+        unidade: document.getElementById('unidade').value,
+        lote: document.getElementById('lote').value,
+        obs: document.getElementById('obs').value,
+        fotoData: fotoBase64, 
+        fotoNome: "PERDA_" + document.getElementById('sku').value + "_" + Date.now() + ".jpg"
+    };
 
-        btn.disabled = true;
-        loading.classList.add('show');
+    btn.disabled = true;
+    loading.classList.add('show');
+
+    try {
+        // Envia para a sua URL do Google Apps Script
+        await fetch(URL_GOOGLE, { 
+            method: 'POST', 
+            body: JSON.stringify(registro) 
+        });
+        
+        showToast('✓ Registro e Foto arquivados!');
+        resetForm();
+    } catch(e) {
+        showToast('❌ Erro ao enviar dados', true);
+        console.error('Erro:', e);
+    } finally {
+        btn.disabled = false;
+        loading.classList.remove('show');
+    }
+}
 
         try {
             await fetch(URL_GOOGLE, { method:'POST', mode:'no-cors', body: JSON.stringify(registro) });

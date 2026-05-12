@@ -1,562 +1,536 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>MILIGRAMA — Registro de Perda</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --green-900: #0f2d13;
-            --green-800: #1a4520;
-            --green-700: #1e5c27;
-            --green-600: #2e7d32;
-            --green-500: #388e3c;
-            --green-400: #4caf50;
-            --green-200: #c8e6c9;
-            --green-100: #e8f5e9;
-            --green-50:  #f1f8f2;
-            --accent:    #00c853;
-            --white:     #ffffff;
-            --gray-50:   #f8faf8;
-            --gray-100:  #f0f4f0;
-            --gray-200:  #e2e8e2;
-            --gray-400:  #9aab9a;
-            --gray-600:  #5a6b5a;
-            --gray-800:  #2c3b2c;
-            --danger:    #e53935;
-            --warning:   #f9a825;
-            --radius-sm: 8px;
-            --radius-md: 14px;
-            --radius-lg: 22px;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,.06);
-            --shadow-md: 0 8px 32px rgba(0,0,0,.10);
-            --shadow-lg: 0 20px 60px rgba(0,0,0,.16);
-            --transition: .18s cubic-bezier(.4,0,.2,1);
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>MILIGRAMA — Registro de Perda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-900: #0f2d13;
+            --green-800: #1a4520;
+            --green-700: #1e5c27;
+            --green-600: #2e7d32;
+            --green-500: #388e3c;
+            --green-400: #4caf50;
+            --green-200: #c8e6c9;
+            --green-100: #e8f5e9;
+            --green-50:  #f1f8f2;
+            --accent:    #00c853;
+            --white:     #ffffff;
+            --gray-50:   #f8faf8;
+            --gray-100:  #f0f4f0;
+            --gray-200:  #e2e8e2;
+            --gray-400:  #9aab9a;
+            --gray-600:  #5a6b5a;
+            --gray-800:  #2c3b2c;
+            --danger:    #e53935;
+            --warning:   #f9a825;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,.06);
+            --shadow-md: 0 8px 32px rgba(0,0,0,.10);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,.16);
+            --transition: .18s cubic-bezier(.4,0,.2,1);
+        }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--green-50);
-            min-height: 100vh;
-            color: var(--gray-800);
-            -webkit-font-smoothing: antialiased;
-        }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--green-50);
+            min-height: 100vh;
+            color: var(--gray-800);
+            -webkit-font-smoothing: antialiased;
+        }
 
-        /* ── TOP BAR ── */
-        .topbar {
-            background: var(--green-800);
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 56px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 12px rgba(0,0,0,.18);
-        }
-        .topbar-brand { display: flex; align-items: center; gap: 10px; }
-        .brand-dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--accent);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%,100% { opacity:1; transform:scale(1); }
-            50% { opacity:.6; transform:scale(1.4); }
-        }
-        .brand-name { font-size: 16px; font-weight: 700; color: var(--white); letter-spacing: .06em; }
-        .brand-sub { font-size: 10px; font-weight: 400; color: var(--green-200); letter-spacing: .12em; text-transform: uppercase; }
-        .topbar-right { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--green-200); text-align: right; }
+        /* ── TOP BAR ── */
+        .topbar {
+            background: var(--green-800);
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0,0,0,.18);
+        }
+        .topbar-brand { display: flex; align-items: center; gap: 10px; }
+        .brand-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%,100% { opacity:1; transform:scale(1); }
+            50% { opacity:.6; transform:scale(1.4); }
+        }
+        .brand-name { font-size: 16px; font-weight: 700; color: var(--white); letter-spacing: .06em; }
+        .brand-sub { font-size: 10px; font-weight: 400; color: var(--green-200); letter-spacing: .12em; text-transform: uppercase; }
+        .topbar-right { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--green-200); text-align: right; }
 
-        /* ── TABS ── */
-        .tabs { display: flex; background: var(--green-900); padding: 0 20px; }
-        .tab-btn {
-            flex: 1; padding: 12px 8px; border: none; background: transparent;
-            color: var(--gray-400); font-family: 'DM Sans', sans-serif;
-            font-size: 12px; font-weight: 600; letter-spacing: .06em;
-            text-transform: uppercase; cursor: pointer; border-bottom: 3px solid transparent;
-            transition: var(--transition);
-        }
-        .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+        /* ── TABS ── */
+        .tabs { display: flex; background: var(--green-900); padding: 0 20px; }
+        .tab-btn {
+            flex: 1; padding: 12px 8px; border: none; background: transparent;
+            color: var(--gray-400); font-family: 'DM Sans', sans-serif;
+            font-size: 12px; font-weight: 600; letter-spacing: .06em;
+            text-transform: uppercase; cursor: pointer; border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+        .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-        /* ── PAGES ── */
-        .page { display: none; padding: 20px; max-width: 540px; margin: 0 auto; }
-        .page.active { display: block; animation: fadeUp .25s ease; }
-        @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+        /* ── PAGES ── */
+        .page { display: none; padding: 20px; max-width: 540px; margin: 0 auto; }
+        .page.active { display: block; animation: fadeUp .25s ease; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
 
-        /* ── CARD ── */
-        .card { background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden; margin-bottom: 16px; }
-        .card-header {
-            background: linear-gradient(135deg, var(--green-700), var(--green-500));
-            padding: 16px 20px; display: flex; align-items: center; gap: 10px;
-        }
-        .card-header-icon {
-            width: 32px; height: 32px; background: rgba(255,255,255,.2);
-            border-radius: 8px; display: flex; align-items:center; justify-content:center; font-size: 16px;
-        }
-        .card-header-text h3 { font-size:14px; font-weight:700; color:var(--white); }
-        .card-header-text p  { font-size:11px; color:rgba(255,255,255,.7); margin-top:2px; }
-        .card-body { padding: 20px; }
+        /* ── CARD ── */
+        .card { background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden; margin-bottom: 16px; }
+        .card-header {
+            background: linear-gradient(135deg, var(--green-700), var(--green-500));
+            padding: 16px 20px; display: flex; align-items: center; gap: 10px;
+        }
+        .card-header-icon {
+            width: 32px; height: 32px; background: rgba(255,255,255,.2);
+            border-radius: 8px; display: flex; align-items:center; justify-content:center; font-size: 16px;
+        }
+        .card-header-text h3 { font-size:14px; font-weight:700; color:var(--white); }
+        .card-header-text p  { font-size:11px; color:rgba(255,255,255,.7); margin-top:2px; }
+        .card-body { padding: 20px; }
 
-        /* ── FORM FIELDS ── */
-        .field { margin-bottom: 16px; }
-        .field-row { display: flex; gap: 12px; }
-        .field-row .field { flex: 1; }
-        
-        label { display: block; font-size: 11px; font-weight: 700; color: var(--green-600); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
-        label span { color: var(--danger); margin-left: 2px; }
+        /* ── FORM FIELDS ── */
+        .field { margin-bottom: 16px; }
+        .field-row { display: flex; gap: 12px; }
+        .field-row .field { flex: 1; }
+        
+        label { display: block; font-size: 11px; font-weight: 700; color: var(--green-600); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+        label span { color: var(--danger); margin-left: 2px; }
 
-        input[type=text], input[type=number], select, textarea {
-            width: 100%; padding: 13px 14px; background: var(--gray-50);
-            border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
-            font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--gray-800);
-            transition: var(--transition); outline: none; -webkit-appearance: none; appearance: none;
-        }
-        input:focus, select:focus, textarea:focus { border-color: var(--green-400); background: var(--white); box-shadow: 0 0 0 3px rgba(76,175,80,.12); }
-        
-        .select-wrap { position: relative; }
-        .select-wrap::after {
-            content: '▾'; position: absolute; right:14px; top:50%; transform:translateY(-50%);
-            color: var(--gray-400); pointer-events:none; font-size:14px;
-        }
+        input[type=text], input[type=number], select, textarea {
+            width: 100%; padding: 13px 14px; background: var(--gray-50);
+            border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+            font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--gray-800);
+            transition: var(--transition); outline: none; -webkit-appearance: none; appearance: none;
+        }
+        input:focus, select:focus, textarea:focus { border-color: var(--green-400); background: var(--white); box-shadow: 0 0 0 3px rgba(76,175,80,.12); }
+        
+        .select-wrap { position: relative; }
+        .select-wrap::after {
+            content: '▾'; position: absolute; right:14px; top:50%; transform:translateY(-50%);
+            color: var(--gray-400); pointer-events:none; font-size:14px;
+        }
 
-        /* ── MOTIVO CHIPS ── */
-        .motivo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
-        .motivo-chip {
-            padding: 10px 12px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
-            background: var(--gray-50); cursor: pointer; transition: var(--transition);
-            display: flex; align-items: center; gap: 8px;
-        }
-        .motivo-chip:active { transform: scale(0.96); }
-        .motivo-chip.selected { border-color: var(--green-500); background: var(--green-100); color: var(--green-800); }
-        .motivo-chip .chip-num {
-            font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500;
-            color: var(--gray-400); background: var(--gray-200); border-radius: 4px;
-            padding: 2px 5px; min-width: 22px; text-align: center;
-        }
-        .motivo-chip.selected .chip-num { background: var(--green-500); color: var(--white); }
-        .motivo-chip .chip-label { font-size: 12px; font-weight: 500; line-height: 1.3; }
+        /* ── MOTIVO CHIPS ── */
+        .motivo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+        .motivo-chip {
+            padding: 10px 12px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+            background: var(--gray-50); cursor: pointer; transition: var(--transition);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .motivo-chip:active { transform: scale(0.96); }
+        .motivo-chip.selected { border-color: var(--green-500); background: var(--green-100); color: var(--green-800); }
+        .motivo-chip .chip-num {
+            font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500;
+            color: var(--gray-400); background: var(--gray-200); border-radius: 4px;
+            padding: 2px 5px; min-width: 22px; text-align: center;
+        }
+        .motivo-chip.selected .chip-num { background: var(--green-500); color: var(--white); }
+        .motivo-chip .chip-label { font-size: 12px; font-weight: 500; line-height: 1.3; }
 
-        /* ── FOTO UPLOAD ── */
-        .foto-area {
-            border: 2px dashed var(--gray-200); border-radius: var(--radius-md);
-            padding: 20px; text-align: center; cursor: pointer; transition: var(--transition);
-            background: var(--gray-50); position: relative;
-        }
-        .foto-area:hover { border-color: var(--green-400); background: var(--green-50); }
-        .foto-area input[type=file] { position: absolute; inset:0; opacity:0; cursor:pointer; }
-        .foto-icon { font-size: 28px; margin-bottom: 8px; }
-        #fotoPreview { display: none; margin-top: 12px; border-radius: var(--radius-sm); overflow: hidden; position: relative; }
-        #fotoPreview img { width: 100%; max-height: 180px; object-fit: cover; display: block; border-radius: var(--radius-sm); }
+        /* ── FOTO UPLOAD ── */
+        .foto-area {
+            border: 2px dashed var(--gray-200); border-radius: var(--radius-md);
+            padding: 20px; text-align: center; cursor: pointer; transition: var(--transition);
+            background: var(--gray-50); position: relative;
+        }
+        .foto-area:hover { border-color: var(--green-400); background: var(--green-50); }
+        .foto-area input[type=file] { position: absolute; inset:0; opacity:0; cursor:pointer; }
+        .foto-icon { font-size: 28px; margin-bottom: 8px; }
+        #fotoPreview { display: none; margin-top: 12px; border-radius: var(--radius-sm); overflow: hidden; position: relative; }
+        #fotoPreview img { width: 100%; max-height: 180px; object-fit: cover; display: block; border-radius: var(--radius-sm); }
 
-        /* ── BUTTONS ── */
-        .btn-primary {
-            width: 100%; padding: 16px; background: linear-gradient(135deg, var(--green-600), var(--green-500));
-            color: var(--white); border: none; border-radius: var(--radius-md); font-weight: 700;
-            cursor: pointer; transition: var(--transition); box-shadow: 0 4px 16px rgba(46,125,50,.35);
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn-primary:active { transform: translateY(2px); box-shadow: none; }
-        .btn-primary:disabled { background: var(--gray-200); color: var(--gray-400); cursor:not-allowed; }
+        /* ── BUTTONS ── */
+        .btn-primary {
+            width: 100%; padding: 16px; background: linear-gradient(135deg, var(--green-600), var(--green-500));
+            color: var(--white); border: none; border-radius: var(--radius-md); font-weight: 700;
+            cursor: pointer; transition: var(--transition); box-shadow: 0 4px 16px rgba(46,125,50,.35);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-primary:active { transform: translateY(2px); box-shadow: none; }
+        .btn-primary:disabled { background: var(--gray-200); color: var(--gray-400); cursor:not-allowed; }
 
-        .btn-secondary { padding: 10px 18px; background: var(--gray-100); color: var(--gray-600); border: none; border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; }
+        .btn-secondary { padding: 10px 18px; background: var(--gray-100); color: var(--gray-600); border: none; border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; }
 
-        /* ── MODAL ── */
-        .modal-overlay { display: none; position: fixed; inset:0; background: rgba(0,0,0,.5); z-index: 200; align-items: flex-end; justify-content: center; padding: 20px; }
-        .modal-overlay.open { display: flex; }
-        .modal { background: var(--white); border-radius: var(--radius-lg); width: 100%; max-width: 500px; animation: slideUp .3s ease; }
-        @keyframes slideUp { from { transform:translateY(100px); } to { transform:translateY(0); } }
+        /* ── MODAL ── */
+        .modal-overlay { display: none; position: fixed; inset:0; background: rgba(0,0,0,.5); z-index: 200; align-items: flex-end; justify-content: center; padding: 20px; }
+        .modal-overlay.open { display: flex; }
+        .modal { background: var(--white); border-radius: var(--radius-lg); width: 100%; max-width: 500px; animation: slideUp .3s ease; }
+        @keyframes slideUp { from { transform:translateY(100px); } to { transform:translateY(0); } }
 
-        .qtd-match { display:none; font-size:11px; font-weight:600; margin-top:4px; }
-        .qtd-match.ok { color: var(--accent); display:block; }
-        .qtd-match.err { color: var(--danger); display:block; }
+        .qtd-match { display:none; font-size:11px; font-weight:600; margin-top:4px; }
+        .qtd-match.ok { color: var(--accent); display:block; }
+        .qtd-match.err { color: var(--danger); display:block; }
 
-        .loading-bar { display: none; text-align: center; padding: 12px; color: var(--green-600); font-weight: 600; }
-        .loading-bar.show { display: flex; align-items:center; justify-content:center; gap:8px; }
-        .spinner { width: 18px; height: 18px; border: 2.5px solid var(--green-200); border-top-color: var(--green-500); border-radius: 50%; animation: spin .7s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-bar { display: none; text-align: center; padding: 12px; color: var(--green-600); font-weight: 600; }
+        .loading-bar.show { display: flex; align-items:center; justify-content:center; gap:8px; }
+        .spinner { width: 18px; height: 18px; border: 2.5px solid var(--green-200); border-top-color: var(--green-500); border-radius: 50%; animation: spin .7s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .toast { position: fixed; top:70px; left:50%; transform:translateX(-50%) translateY(-20px); background: var(--green-800); color: var(--white); padding: 12px 24px; border-radius: 100px; font-size: 13px; font-weight: 600; opacity: 0; z-index: 300; transition: all .3s ease; }
-        .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+        .toast { position: fixed; top:70px; left:50%; transform:translateX(-50%) translateY(-20px); background: var(--green-800); color: var(--white); padding: 12px 24px; border-radius: 100px; font-size: 13px; font-weight: 600; opacity: 0; z-index: 300; transition: all .3s ease; }
+        .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
-        .hist-item { background: var(--white); border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 10px; border-left: 4px solid var(--green-400); }
-    </style>
+        .hist-item { background: var(--white); border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 10px; border-left: 4px solid var(--green-400); }
+    </style>
 </head>
 <body>
 
 <div class="topbar">
-    <div class="topbar-brand">
-        <div class="brand-dot"></div>
-        <div>
-            <div class="brand-name">MILIGRAMA</div>
-            <div class="brand-sub">Controle de Perdas</div>
-        </div>
-    </div>
-    <div class="topbar-right" id="clockDisplay"></div>
+    <div class="topbar-brand">
+        <div class="brand-dot"></div>
+        <div>
+            <div class="brand-name">MILIGRAMA</div>
+            <div class="brand-sub">Controle de Perdas</div>
+        </div>
+    </div>
+    <div class="topbar-right" id="clockDisplay"></div>
 </div>
 
 <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('registrar', this)">＋ Registrar</button>
-    <button class="tab-btn" onclick="showTab('historico', this)">📋 Histórico</button>
+    <button class="tab-btn active" onclick="showTab('registrar', this)">＋ Registrar</button>
+    <button class="tab-btn" onclick="showTab('historico', this)">📋 Histórico</button>
 </div>
 
 <!-- TAB: REGISTRAR -->
 <div id="tab-registrar" class="page active">
 
-    <div class="card" style="margin-top:20px;">
-        <div class="card-header">
-            <div class="card-header-icon">📦</div>
-            <div class="card-header-text">
-                <h3>Identificação</h3>
-                <p>Dados obrigatórios do item</p>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="field-row">
-                <div class="field" style="flex:0.6;">
-                    <label>SKU <span>*</span></label>
-                    <input type="text" id="sku" placeholder="Cód." autocomplete="off">
-                </div>
-                <div class="field" style="flex:1.4;">
-                    <label>Nome do Produto <span>*</span></label>
-                    <input type="text" id="produtoNome" placeholder="Nome do item" autocomplete="off">
-                </div>
-            </div>
-            <div class="field-row">
-                <div class="field">
-                    <label>Setor <span>*</span></label>
-                    <div class="select-wrap">
-                        <select id="setor">
-                            <option value="">Selecione...</option>
-                            <option value="ESTOQUE">ESTOQUE</option>
-                            <option value="SÓLIDOS">SÓLIDOS</option>
-                            <option value="CONTROLE DE QUALIDADE">CONTROLE DE QUALIDADE</option>
-                            <option value="DERMATO">DERMATO</option>
-                            <option value="HOMEOPATIA">HOMEOPATIA</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="field">
-                    <label>Responsável <span>*</span></label>
-                    <input type="text" id="responsavel" placeholder="Nome" autocomplete="off">
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="card" style="margin-top:20px;">
+        <div class="card-header">
+            <div class="card-header-icon">📦</div>
+            <div class="card-header-text">
+                <h3>Identificação</h3>
+                <p>Dados obrigatórios do item</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="field-row">
+                <div class="field" style="flex:0.6;">
+                    <label>SKU <span>*</span></label>
+                    <input type="text" id="sku" placeholder="Cód." autocomplete="off">
+                </div>
+                <div class="field" style="flex:1.4;">
+                    <label>Nome do Produto <span>*</span></label>
+                    <input type="text" id="produtoNome" placeholder="Nome do item" autocomplete="off">
+                </div>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <label>Setor <span>*</span></label>
+                    <div class="select-wrap">
+                        <select id="setor">
+                            <option value="">Selecione...</option>
+                            <option value="ESTOQUE">ESTOQUE</option>
+                            <option value="SÓLIDOS">SÓLIDOS</option>
+                            <option value="CONTROLE DE QUALIDADE">CONTROLE DE QUALIDADE</option>
+                            <option value="DERMATO">DERMATO</option>
+                            <option value="HOMEOPATIA">HOMEOPATIA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Responsável <span>*</span></label>
+                    <input type="text" id="responsavel" placeholder="Nome" autocomplete="off">
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div class="card">
-        <div class="card-header">
-            <div class="card-header-icon">⚠️</div>
-            <div class="card-header-text">
-                <h3>Motivo da Perda</h3>
-                <p>Selecione uma opção <span>*</span></p>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="motivo-grid" id="motivoGrid">
-                <div class="motivo-chip" onclick="selectMotivo(this,'Furto / Roubo')"><span class="chip-num">1</span><span class="chip-label">Furto / Roubo</span></div>
-                <div class="motivo-chip" onclick="selectMotivo(this,'Avaria')"><span class="chip-num">2</span><span class="chip-label">Avaria</span></div>
-                <div class="motivo-chip" onclick="selectMotivo(this,'Vencimento')"><span class="chip-num">3</span><span class="chip-label">Vencimento</span></div>
-                <div class="motivo-chip" onclick="selectMotivo(this,'Recolhimento VISA')"><span class="chip-num">4</span><span class="chip-label">Recolhimento VISA</span></div>
-                <div class="motivo-chip" onclick="selectMotivo(this,'Perda Processo')"><span class="chip-num">5</span><span class="chip-label">Perda Processo</span></div>
-                <div class="motivo-chip" onclick="selectMotivo(this,'Coleta Controle Qualidade')"><span class="chip-num">6</span><span class="chip-label">Coleta Controle Qualidade</span></div>
-                <div class="motivo-chip" onclick="selectMotivo(this,'Perda de exclusão da Portaria 344')"><span class="chip-num">7</span><span class="chip-label">Perda de exclusão da Portaria 344</span></div>
-                <div class="motivo-chip" onclick="selectMotivo(this,'Desvio de Qualidade')"><span class="chip-num">8</span><span class="chip-label">Desvio de Qualidade</span></div>
-                <div class="motivo-chip" onclick="selectMotivo(this,'Recolhimento do Fabricante')"><span class="chip-num">9</span><span class="chip-label">Recolhimento do Fabricante</span></div>
-                
-            </div>
-            <input type="hidden" id="motivoVal">
-        </div>
-    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-header-icon">⚠️</div>
+            <div class="card-header-text">
+                <h3>Motivo da Perda</h3>
+                <p>Selecione uma opção <span>*</span></p>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="motivo-grid" id="motivoGrid">
+                <div class="motivo-chip" onclick="selectMotivo(this,'Furto / Roubo')"><span class="chip-num">1</span><span class="chip-label">Furto / Roubo</span></div>
+                <div class="motivo-chip" onclick="selectMotivo(this,'Avaria')"><span class="chip-num">2</span><span class="chip-label">Avaria</span></div>
+                <div class="motivo-chip" onclick="selectMotivo(this,'Vencimento')"><span class="chip-num">3</span><span class="chip-label">Vencimento</span></div>
+                <div class="motivo-chip" onclick="selectMotivo(this,'Recolhimento VISA')"><span class="chip-num">4</span><span class="chip-label">Recolhimento VISA</span></div>
+                <div class="motivo-chip" onclick="selectMotivo(this,'Perda Processo')"><span class="chip-num">5</span><span class="chip-label">Perda Processo</span></div>
+                <div class="motivo-chip" onclick="selectMotivo(this,'Coleta Controle Qualidade')"><span class="chip-num">6</span><span class="chip-label">Coleta Controle Qualidade</span></div>
+                <div class="motivo-chip" onclick="selectMotivo(this,'Perda de exclusão da Portaria 344')"><span class="chip-num">7</span><span class="chip-label">Perda de exclusão da Portaria 344</span></div>
+                <div class="motivo-chip" onclick="selectMotivo(this,'Desvio de Qualidade')"><span class="chip-num">8</span><span class="chip-label">Desvio de Qualidade</span></div>
+                <div class="motivo-chip" onclick="selectMotivo(this,'Recolhimento do Fabricante')"><span class="chip-num">9</span><span class="chip-label">Recolhimento do Fabricante</span></div>
+                
+            </div>
+            <input type="hidden" id="motivoVal">
+        </div>
+    </div>
 
-    <div class="card">
-        <div class="card-header">
-            <div class="card-header-icon">⚖️</div>
-            <div class="card-header-text">
-                <h3>Quantidade & Lote</h3>
-                <p>Dados de conferência</p>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="field-row">
-                <div class="field">
-                    <label>Quantidade <span>*</span></label>
-                    <input type="number" id="qtd" step="0.001" placeholder="0,000" oninput="checkQtd()">
-                </div>
-                <div class="field">
-                    <label>Confirmar Qtd. <span>*</span></label>
-                    <input type="number" id="qtdConfirma" step="0.001" placeholder="0,000" oninput="checkQtd()">
-                </div>
-            </div>
-            <div class="qtd-match" id="qtdMatch"></div>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-header-icon">⚖️</div>
+            <div class="card-header-text">
+                <h3>Quantidade & Lote</h3>
+                <p>Dados de conferência</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="field-row">
+                <div class="field">
+                    <label>Quantidade <span>*</span></label>
+                    <input type="number" id="qtd" step="0.001" placeholder="0,000" oninput="checkQtd()">
+                </div>
+                <div class="field">
+                    <label>Confirmar Qtd. <span>*</span></label>
+                    <input type="number" id="qtdConfirma" step="0.001" placeholder="0,000" oninput="checkQtd()">
+                </div>
+            </div>
+            <div class="qtd-match" id="qtdMatch"></div>
 
-            <div class="field-row" style="margin-top:4px;">
-                <div class="field" style="flex:0.7;">
-                    <label>Unidade <span>*</span></label>
-                    <div class="select-wrap">
-                        <select id="unidade">
-                            <option value="">Clique para selecionar...</option>
-                            <option value="G">Grama (G)</option>
-                            <option value="KG">Quilo (KG)</option>
-                            <option value="L">Litro (L)</option>
-                            <option value="ML">Mililitro (ML)</option>
-                            <option value="UN">Unidade (UN)</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="field" style="flex:1.3;">
-                    <label>Lote <span>*</span></label>
-                    <input type="text" id="lote" placeholder="Número do lote" autocomplete="off">
-                </div>
-            </div>
-        </div>
-    </div>
+            <div class="field-row" style="margin-top:4px;">
+                <div class="field" style="flex:0.7;">
+                    <label>Unidade <span>*</span></label>
+                    <div class="select-wrap">
+                        <select id="unidade">
+                            <option value="">Clique para selecionar...</option>
+                            <option value="G">Grama (G)</option>
+                            <option value="KG">Quilo (KG)</option>
+                            <option value="L">Litro (L)</option>
+                            <option value="ML">Mililitro (ML)</option>
+                            <option value="UN">Unidade (UN)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field" style="flex:1.3;">
+                    <label>Lote <span>*</span></label>
+                    <input type="text" id="lote" placeholder="Número do lote" autocomplete="off">
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div class="card">
-        <div class="card-header">
-            <div class="card-header-icon">📷</div>
-            <div class="card-header-text">
-                <h3>Evidências (Opcional)</h3>
-                <p>Foto e Observações</p>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="foto-area" id="fotoArea">
-                <input type="file" id="fotoInput" accept="image/*" capture="environment" onchange="previewFoto(this)">
-                <div class="foto-icon">📸</div>
-                <div class="foto-text">Tirar foto / Galeria</div>
-            </div>
-            <div id="fotoPreview">
-                <img id="fotoImg" src="" alt="Preview">
-                <button class="btn-secondary" style="width:100%; margin-top:8px;" onclick="removerFoto()">Remover Foto</button>
-            </div>
-            <div class="field" style="margin-top:14px; margin-bottom:0;">
-                <label>Observações</label>
-                <textarea id="obs" placeholder="Algum detalhe adicional?"></textarea>
-            </div>
-        </div>
-    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-header-icon">📷</div>
+            <div class="card-header-text">
+                <h3>Evidências (Opcional)</h3>
+                <p>Foto e Observações</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="foto-area" id="fotoArea">
+                <input type="file" id="fotoInput" accept="image/*" capture="environment" onchange="previewFoto(this)">
+                <div class="foto-icon">📸</div>
+                <div class="foto-text">Tirar foto / Galeria</div>
+            </div>
+            <div id="fotoPreview">
+                <img id="fotoImg" src="" alt="Preview">
+                <button class="btn-secondary" style="width:100%; margin-top:8px;" onclick="removerFoto()">Remover Foto</button>
+            </div>
+            <div class="field" style="margin-top:14px; margin-bottom:0;">
+                <label>Observações</label>
+                <textarea id="obs" placeholder="Algum detalhe adicional?"></textarea>
+            </div>
+        </div>
+    </div>
 
-    <div class="loading-bar" id="loading">
-        <div class="spinner"></div> Enviando registro…
-    </div>
+    <div class="loading-bar" id="loading">
+        <div class="spinner"></div> Enviando registro…
+    </div>
 
-    <button class="btn-primary" id="btnSalvar" onclick="abrirConfirmacao()">
-        Revisar e Confirmar Registro
-    </button>
-    <div class="safe-area" style="height:40px;"></div>
+    <button class="btn-primary" id="btnSalvar" onclick="abrirConfirmacao()">
+        Revisar e Confirmar Registro
+    </button>
+    <div class="safe-area" style="height:40px;"></div>
 </div>
 
 <!-- TAB: HISTÓRICO -->
 <div id="tab-historico" class="page">
-    <div style="margin-top:20px;">
-        <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom:15px;">
-            <h3 style="font-size:14px; color:var(--gray-600)" id="histCount">Carregando...</h3>
-            <button class="btn-secondary" onclick="carregarHistorico()">↺ Atualizar</button>
-        </div>
-        <div id="listaHistorico"></div>
-    </div>
+    <div style="margin-top:20px;">
+        <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom:15px;">
+            <h3 style="font-size:14px; color:var(--gray-600)" id="histCount">Carregando...</h3>
+            <button class="btn-secondary" onclick="carregarHistorico()">↺ Atualizar</button>
+        </div>
+        <div id="listaHistorico"></div>
+    </div>
 </div>
 
 <!-- MODAL CONFIRMAÇÃO -->
 <div class="modal-overlay" id="modalOverlay">
-    <div class="modal">
-        <div style="padding:20px; text-align:center; background: var(--green-50); border-radius: 22px 22px 0 0;">
-            <h2 style="font-size:18px; color:var(--green-800)">Confirmar Dados?</h2>
-        </div>
-        <div style="padding:20px;" id="modalBody"></div>
-        <div style="padding:20px; display:flex; gap:10px;">
-            <button class="btn-secondary" style="flex:1" onclick="fecharModal()">Corrigir</button>
-            <button class="btn-primary" style="flex:2" onclick="salvarNaNuvem()">Sim, Salvar!</button>
-        </div>
-    </div>
+    <div class="modal">
+        <div style="padding:20px; text-align:center; background: var(--green-50); border-radius: 22px 22px 0 0;">
+            <h2 style="font-size:18px; color:var(--green-800)">Confirmar Dados?</h2>
+        </div>
+        <div style="padding:20px;" id="modalBody"></div>
+        <div style="padding:20px; display:flex; gap:10px;">
+            <button class="btn-secondary" style="flex:1" onclick="fecharModal()">Corrigir</button>
+            <button class="btn-primary" style="flex:2" onclick="salvarNaNuvem()">Sim, Salvar!</button>
+        </div>
+    </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-    const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbzVKD-G1JTNRRmp53Y-RejcLCCS-SXnMBlicqyLgEIKczIfK-oIb5_fs1sf8lnzvU8a/exec";
+    const URL_GOOGLE = "https://script.google.com/macros/s/AKfycbzVKD-G1JTNRRmp53Y-RejcLCCS-SXnMBlicqyLgEIKczIfK-oIb5_fs1sf8lnzvU8a/exec";
 
-    function updateClock() {
-        const now = new Date();
-        document.getElementById('clockDisplay').innerHTML = now.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}) + ' ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-    }
-    setInterval(updateClock, 1000); updateClock();
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('clockDisplay').innerHTML = now.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}) + ' ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    }
+    setInterval(updateClock, 1000); updateClock();
 
-    function showTab(name, btn) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById('tab-' + name).classList.add('active');
-        btn.classList.add('active');
-        if (name === 'historico') carregarHistorico();
-    }
+    function showTab(name, btn) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-' + name).classList.add('active');
+        btn.classList.add('active');
+        if (name === 'historico') carregarHistorico();
+    }
 
-    function selectMotivo(chip, val) {
-        document.querySelectorAll('.motivo-chip').forEach(c => c.classList.remove('selected'));
-        chip.classList.add('selected');
-        document.getElementById('motivoVal').value = val;
-    }
+    function selectMotivo(chip, val) {
+        document.querySelectorAll('.motivo-chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+        document.getElementById('motivoVal').value = val;
+    }
 
-    function checkQtd() {
-        const q1 = document.getElementById('qtd').value;
-        const q2 = document.getElementById('qtdConfirma').value;
-        const el = document.getElementById('qtdMatch');
-        if (!q1 || !q2) { el.className = 'qtd-match'; return; }
-        if (q1 === q2) { el.textContent = '✓ Quantidades conferem'; el.className = 'qtd-match ok'; }
-        else { el.textContent = '✗ Quantidades não conferem'; el.className = 'qtd-match err'; }
-    }
+    function checkQtd() {
+        const q1 = document.getElementById('qtd').value;
+        const q2 = document.getElementById('qtdConfirma').value;
+        const el = document.getElementById('qtdMatch');
+        if (!q1 || !q2) { el.className = 'qtd-match'; return; }
+        if (q1 === q2) { el.textContent = '✓ Quantidades conferem'; el.className = 'qtd-match ok'; }
+        else { el.textContent = '✗ Quantidades não conferem'; el.className = 'qtd-match err'; }
+    }
 
-    function previewFoto(input) {
-        const file = input.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = e => {
-            document.getElementById('fotoImg').src = e.target.result;
-            document.getElementById('fotoPreview').style.display = 'block';
-            document.getElementById('fotoArea').style.display = 'none';
-        };
-        reader.readAsDataURL(file);
-    }
-    function removerFoto() {
-        document.getElementById('fotoInput').value = '';
-        document.getElementById('fotoPreview').style.display = 'none';
-        document.getElementById('fotoArea').style.display = 'block';
-    }
+    function previewFoto(input) {
+        const file = input.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = e => {
+            document.getElementById('fotoImg').src = e.target.result;
+            document.getElementById('fotoPreview').style.display = 'block';
+            document.getElementById('fotoArea').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+    }
+    function removerFoto() {
+        document.getElementById('fotoInput').value = '';
+        document.getElementById('fotoPreview').style.display = 'none';
+        document.getElementById('fotoArea').style.display = 'block';
+    }
 
-    function abrirConfirmacao() {
-        const fields = {
-            sku: document.getElementById('sku').value.trim(),
-            nome: document.getElementById('produtoNome').value.trim(),
-            setor: document.getElementById('setor').value,
-            resp: document.getElementById('responsavel').value.trim(),
-            motivo: document.getElementById('motivoVal').value,
-            qtd: document.getElementById('qtd').value,
-            qtdC: document.getElementById('qtdConfirma').value,
-            unidade: document.getElementById('unidade').value,
-            lote: document.getElementById('lote').value.trim()
-        };
+    function abrirConfirmacao() {
+        const fields = {
+            sku: document.getElementById('sku').value.trim(),
+            nome: document.getElementById('produtoNome').value.trim(),
+            setor: document.getElementById('setor').value,
+            resp: document.getElementById('responsavel').value.trim(),
+            motivo: document.getElementById('motivoVal').value,
+            qtd: document.getElementById('qtd').value,
+            qtdC: document.getElementById('qtdConfirma').value,
+            unidade: document.getElementById('unidade').value,
+            lote: document.getElementById('lote').value.trim()
+        };
 
-        if (Object.values(fields).some(v => !v)) {
-            showToast('⚠️ Preencha todos os campos obrigatórios!', true); return;
-        }
-        if (fields.qtd !== fields.qtdC) {
-            showToast('⚠️ Quantidades não conferem!', true); return;
-        }
+        if (Object.values(fields).some(v => !v)) {
+            showToast('⚠️ Preencha todos os campos obrigatórios!', true); return;
+        }
+        if (fields.qtd !== fields.qtdC) {
+            showToast('⚠️ Quantidades não conferem!', true); return;
+        }
 
-        document.getElementById('modalBody').innerHTML = `
-            <p style="font-size:13px; margin-bottom:5px;"><strong>Produto:</strong> ${fields.nome}</p>
-            <p style="font-size:13px; margin-bottom:5px;"><strong>Setor:</strong> ${fields.setor}</p>
-            <p style="font-size:13px; margin-bottom:5px;"><strong>Motivo:</strong> ${fields.motivo}</p>
-            <p style="font-size:15px; color:var(--green-700)"><strong>Qtd:</strong> ${fields.qtd} ${fields.unidade}</p>
-        `;
-        document.getElementById('modalOverlay').classList.add('open');
-    }
+        document.getElementById('modalBody').innerHTML = `
+            <p style="font-size:13px; margin-bottom:5px;"><strong>Produto:</strong> ${fields.nome}</p>
+            <p style="font-size:13px; margin-bottom:5px;"><strong>Setor:</strong> ${fields.setor}</p>
+            <p style="font-size:13px; margin-bottom:5px;"><strong>Motivo:</strong> ${fields.motivo}</p>
+            <p style="font-size:15px; color:var(--green-700)"><strong>Qtd:</strong> ${fields.qtd} ${fields.unidade}</p>
+        `;
+        document.getElementById('modalOverlay').classList.add('open');
+    }
 
-    function fecharModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+    function fecharModal() { document.getElementById('modalOverlay').classList.remove('open'); }
 
-    async function salvarNaNuvem() {
-    fecharModal();
-    const btn = document.getElementById('btnSalvar');
-    const loading = document.getElementById('loading');
-    
-    // Captura a imagem em Base64 do elemento preview
-    const fotoPreview = document.getElementById('fotoImg');
-    const temFoto = document.getElementById('fotoPreview').style.display === 'block';
-    const fotoBase64 = temFoto ? fotoPreview.src : "";
+    async function salvarNaNuvem() {
+        fecharModal();
+        const btn = document.getElementById('btnSalvar');
+        const loading = document.getElementById('loading');
 
-    // Organiza os dados para o envio conforme o projeto BIP ESTOQUE
-    const registro = {
-        data: new Date().toLocaleString('pt-BR'),
-        sku: document.getElementById('sku').value,
-        produto: document.getElementById('produtoNome').value,
-        setor: document.getElementById('setor').value,
-        responsavel: document.getElementById('responsavel').value,
-        motivo: document.getElementById('motivoVal').value,
-        qtd: document.getElementById('qtd').value,
-        unidade: document.getElementById('unidade').value,
-        lote: document.getElementById('lote').value,
-        obs: document.getElementById('obs').value,
-        fotoData: fotoBase64, 
-        fotoNome: "PERDA_" + document.getElementById('sku').value + "_" + Date.now() + ".jpg"
-    };
+        const registro = {
+            data: new Date().toLocaleString('pt-BR'),
+            sku: document.getElementById('sku').value,
+            produto: document.getElementById('produtoNome').value,
+            setor: document.getElementById('setor').value,
+            responsavel: document.getElementById('responsavel').value,
+            motivo: document.getElementById('motivoVal').value,
+            qtd: document.getElementById('qtd').value,
+            unidade: document.getElementById('unidade').value,
+            lote: document.getElementById('lote').value,
+            obs: document.getElementById('obs').value
+        };
 
-    btn.disabled = true;
-    loading.classList.add('show');
+        btn.disabled = true;
+        loading.classList.add('show');
 
-    try {
-        // Envia para a sua URL do Google Apps Script
-        await fetch(URL_GOOGLE, { 
-            method: 'POST', 
-            body: JSON.stringify(registro) 
-        });
-        
-        showToast('✓ Registro e Foto arquivados!');
-        resetForm();
-    } catch(e) {
-        showToast('❌ Erro ao enviar dados', true);
-        console.error('Erro:', e);
-    } finally {
-        btn.disabled = false;
-        loading.classList.remove('show');
-    }
-}
+        try {
+            await fetch(URL_GOOGLE, { method:'POST', mode:'no-cors', body: JSON.stringify(registro) });
+            showToast('✓ Registro salvo com sucesso!');
+            resetForm();
+        } catch(e) {
+            showToast('❌ Erro de conexão', true);
+        } finally {
+            btn.disabled = false;
+            loading.classList.remove('show');
+        }
+    }
 
-        try {
-            await fetch(URL_GOOGLE, { method:'POST', mode:'no-cors', body: JSON.stringify(registro) });
-            showToast('✓ Registro salvo com sucesso!');
-            resetForm();
-        } catch(e) {
-            showToast('❌ Erro de conexão', true);
-        } finally {
-            btn.disabled = false;
-            loading.classList.remove('show');
-        }
-    }
+    function resetForm() {
+        ['sku','produtoNome','responsavel','qtd','qtdConfirma','lote','obs','motivoVal'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('setor').value = '';
+        document.getElementById('unidade').value = '';
+        document.querySelectorAll('.motivo-chip').forEach(c => c.classList.remove('selected'));
+        document.getElementById('qtdMatch').className = 'qtd-match';
+        removerFoto();
+    }
 
-    function resetForm() {
-        ['sku','produtoNome','responsavel','qtd','qtdConfirma','lote','obs','motivoVal'].forEach(id => document.getElementById(id).value = '');
-        document.getElementById('setor').value = '';
-        document.getElementById('unidade').value = '';
-        document.querySelectorAll('.motivo-chip').forEach(c => c.classList.remove('selected'));
-        document.getElementById('qtdMatch').className = 'qtd-match';
-        removerFoto();
-    }
+    function showToast(msg, error = false) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.style.background = error ? 'var(--danger)' : 'var(--green-800)';
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3000);
+    }
 
-    function showToast(msg, error = false) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.style.background = error ? 'var(--danger)' : 'var(--green-800)';
-        t.classList.add('show');
-        setTimeout(() => t.classList.remove('show'), 3000);
-    }
+    async function carregarHistorico() {
+        const lista = document.getElementById('listaHistorico');
+        lista.innerHTML = '<p style="text-align:center; color:var(--gray-400)">Buscando...</p>';
+        try {
+            const res = await fetch(URL_GOOGLE);
+            const dados = await res.json();
+            const rows = dados.slice(1).reverse().slice(0, 15);
+            document.getElementById('histCount').textContent = rows.length + ' registros';
+            lista.innerHTML = '';
+            rows.forEach(l => {
+                lista.innerHTML += `
+                    <div class="hist-item">
+                        <div style="font-weight:700; font-size:14px;">${l[2] || '—'}</div>
+                        <div style="font-size:11px; color:var(--gray-400)">${l[0]} | Setor: ${l[3]}</div>
+                        <div style="font-size:12px; margin-top:5px;"><strong>${l[6] || l[5]} ${l[7] || ''}</strong> - ${l[5] || l[4]}</div>
+                    </div>`;
+            });
+        } catch(e) { lista.innerHTML = '<p>Erro ao carregar histórico.</p>'; }
+    }
 
-    async function carregarHistorico() {
-        const lista = document.getElementById('listaHistorico');
-        lista.innerHTML = '<p style="text-align:center; color:var(--gray-400)">Buscando...</p>';
-        try {
-            const res = await fetch(URL_GOOGLE);
-            const dados = await res.json();
-            const rows = dados.slice(1).reverse().slice(0, 15);
-            document.getElementById('histCount').textContent = rows.length + ' registros';
-            lista.innerHTML = '';
-            rows.forEach(l => {
-                lista.innerHTML += `
-                    <div class="hist-item">
-                        <div style="font-weight:700; font-size:14px;">${l[2] || '—'}</div>
-                        <div style="font-size:11px; color:var(--gray-400)">${l[0]} | Setor: ${l[3]}</div>
-                        <div style="font-size:12px; margin-top:5px;"><strong>${l[6] || l[5]} ${l[7] || ''}</strong> - ${l[5] || l[4]}</div>
-                    </div>`;
-            });
-        } catch(e) { lista.innerHTML = '<p>Erro ao carregar histórico.</p>'; }
-    }
-
-    document.getElementById('modalOverlay').addEventListener('click', function(e){ if(e.target === this) fecharModal(); });
+    document.getElementById('modalOverlay').addEventListener('click', function(e){ if(e.target === this) fecharModal(); });
 </script>
 </body>
 </html>
